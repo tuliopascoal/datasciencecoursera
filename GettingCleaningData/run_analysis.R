@@ -65,11 +65,12 @@ range <- 1:6
                         mean_std_data$Activity[mean_std_data$Activity == i] <- as.character(activity_labels[i,2])
                }
 mean_std_data$Activity <- as.factor(mean_std_data$Activity)
+mean_std_data$Subject <- as.factor(mean_std_data$Subject)
 
 
 
 #### Goal 4: Appropriately labels the data set with descriptive variable names. ####
-
+        
 
 names(mean_std_data)<-gsub("Acc", "Accelerometer", names(mean_std_data))
 names(mean_std_data)<-gsub("Gyro", "Gyroscope", names(mean_std_data))
@@ -88,7 +89,6 @@ names(mean_std_data)<-gsub("gravity", "Gravity", names(mean_std_data))
 #### Goal 5: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. ####
 
 
-mean_std_data$Subject <- as.factor(mean_std_data$Subject)
 mean_std_data <- data.table(mean_std_data)
 
 tidyData <- aggregate(. ~Subject + Activity, mean_std_data, mean)
